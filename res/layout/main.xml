@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="800px"
+    android:layout_height="480px"
+    android:background="@drawable/bgapps"
+    android:gravity="center"
+    >
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="200px"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:layout_marginLeft="20px"
+    >
+    <ImageButton android:id="@+id/store_imagebtn_1" 
+		android:layout_gravity="center"
+		android:layout_width="190px" 
+		android:layout_height="68px"
+		>
+	</ImageButton>
+	<ImageButton android:id="@+id/store_imagebtn_2" 
+		android:layout_gravity="center"
+		android:layout_width="190px" 
+		android:layout_height="68px"
+		android:layout_marginTop="15px">
+		</ImageButton>
+		<ImageButton android:id="@+id/store_imagebtn_3" 
+		android:layout_gravity="center"
+		android:layout_width="190px" 
+		android:layout_height="68px"
+		android:layout_marginTop="15px">
+		</ImageButton>
+		<ImageButton android:id="@+id/store_imagebtn_4"
+		android:layout_gravity="center"
+		android:layout_width="190px" 
+		android:layout_height="68px"
+		android:layout_marginTop="15px">
+		</ImageButton>
+    </LinearLayout>
+    <LinearLayout
+    android:orientation="vertical"
+    android:layout_width="600px"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    >
+	    <ListView
+			android:id="@+id/zzList"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+		/> 
+    </LinearLayout>
+    
+ 
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/appwidget"
+    >
+
+    <TextView
+        android:id="@+id/appTextView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/maroon"
+        android:textSize="7pt"
+        android:padding="4dip"
+        android:layout_gravity="center"
+        />
+    <ImageButton
+        android:id="@+id/appImageButton"
+        android:clickable="true"
+        android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:background="#00000000"
+		android:src="@drawable/news"
+		android:layout_gravity="center"
+		android:layout_marginBottom="2dip"
+        />
+</LinearLayout>

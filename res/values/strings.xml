@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ReadNewsActivity!</string>
+    <string name="app_name">ReadNews</string>
+    <string name="nationUrl">http://rss.sina.com.cn/news/china/focus15.xml</string>
+    <string name="internationUrl">http://rss.sina.com.cn/news/world/focus15.xml</string>
+    <string name="enterUrl">http://rss.sina.com.cn/news/allnews/ent.xml</string>
+    <string name="sportUrl">http://rss.sina.com.cn/roll/sports/hot_roll.xml</string>
+        
+</resources>
