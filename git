@@ -1,0 +1,7 @@
+#! /bin/sh
+
+git add *
+git commit -m "word"
+git remote add origin git@github.com:lihao814386741/ReadNews.git
+git push -u origin master 
+
