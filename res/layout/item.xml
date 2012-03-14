@@ -10,7 +10,7 @@
         android:id="@+id/titleTextView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="10pt"
         android:padding="8dip"
         android:gravity="center"

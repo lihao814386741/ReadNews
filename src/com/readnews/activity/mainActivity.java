@@ -1,5 +1,6 @@
 package com.readnews.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.BroadcastReceiver;
@@ -12,28 +13,35 @@ import android.content.res.Configuration;
 import com.readnews.R;
 
 
-import com.readnews.activity.NewsListActivity.newsReceiver;
 import com.readnews.service.readNewsService;
+import com.readnews.xml.NewsAdapter;
 import com.readnews.xml.RssGroup;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TabHost.TabSpec;
 
-public class mainActivity extends TabActivity{
-
+public class mainActivity extends Activity implements OnItemClickListener{
+	
 	private TabHost tabHost;
 	private TabSpec nationNews;
 	private TabSpec internationNews;
@@ -41,58 +49,123 @@ public class mainActivity extends TabActivity{
 	private TabSpec sportNews;
 	private Context context = this;
 	private int CurrentView = 0;
-
+	private String url = null;
+	private DrawAsyncTask asyncTask = null;
+	private ListView listView = null; 
+	private ProgressDialog dialog = null;
+	private RssGroup itemList = null;
+	private  newsReceiver receiver = null;
+	private Button button1 = null;
+	private Button button2 = null;
+	private Button button3 = null;
+	private Button button4 = null;
+	private Button button5 = null;
+	private RssGroup[] allList = null;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.main);
 		
+		//this.requestWindowFeature(Window.FEATURE_PROGRESS);
+		
+		
+		
+		allList = new RssGroup[8];
 //		
-			Toast toast = Toast.makeText(this,
-				     "正在载入程序...", Toast.LENGTH_LONG);
-			toast.setGravity(Gravity.CENTER, 0, 0);
-			toast.show();
-
-//			tabHost = (TabHost)this.findViewById(android.R.id.tabhost);
-//
-//			for (int i = 0; i < AppContent.url.newsUrl.length; ++ i)
-//			{
-//
-//				System.out.println("system.out.println + " + AppContent.url.newsUrl[i]);
-//				NewsListActivity newsActivity = new NewsListActivity();
-//				TabSpec newsSpec = tabHost.newTabSpec(Integer.toString(i));
-//				Intent transIntent = new Intent(this, newsActivity.getClass());
-//				transIntent.putExtra("url", AppContent.url.newsUrl[i]);
-//				newsSpec.setIndicator(AppContent.url.newsTab[i]).setContent(transIntent);
-//
-//				tabHost.addTab(newsSpec);
-//				System.out.println("Before set Tab");
-//
-//				tabHost.setCurrentTabByTag(Integer.toString(i));
-//			}
-//			
-//			
-//		
-//			
-//			tabHost.setCurrentTabByTag(Integer.toString(0));
-//			
-//			Intent updateIntent = new Intent();
-//			updateIntent.setClass(this, readNewsService.class);
-//			this.startService(updateIntent);
-//			
-//		
-//			
-//			this.getWindow().setBackgroundDrawableResource(R.color.black);
-//
-//		
-//
-//		
-//		
-//		
+		Toast toast = Toast.makeText(this,
+				"正在载入程序...", Toast.LENGTH_LONG);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+		
+		button1 = (Button)findViewById(R.id.button1);
+		button2 = (Button)findViewById(R.id.button2);
+		button3 = (Button)findViewById(R.id.button3);
+		button4 = (Button)findViewById(R.id.button4);
+		button5 = (Button)findViewById(R.id.button5);
+		
+		button1.setText("国内新闻");
+		button2.setText("国际新闻");
+		button3.setText("娱乐新闻");
+		button4.setText("体育新闻");
+		button5.setText("科技新闻");
+		
+		
+		url = AppContent.url.newsUrl[0];
+		button1.setOnClickListener(new Button.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				url = AppContent.url.newsUrl[0];
+				System.out.println("BUTTON1");
+				NewsAdapter newsAdapter = new NewsAdapter(allList[0], listView.getContext());
+				listView.setAdapter(newsAdapter);
+			}
+		});
+		button2.setOnClickListener(new Button.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				url = AppContent.url.newsUrl[1];
+				NewsAdapter newsAdapter = new NewsAdapter(allList[1], listView.getContext());
+				listView.setAdapter(newsAdapter);
+				System.out.println("BUTTON2");
+			}
+		});
+		button3.setOnClickListener(new Button.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				NewsAdapter newsAdapter = new NewsAdapter(allList[2], listView.getContext());
+				listView.setAdapter(newsAdapter);
+				url = AppContent.url.newsUrl[2];
+				System.out.println("BUTTON3");
+			}
+		});
+		button4.setOnClickListener(new Button.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				NewsAdapter newsAdapter = new NewsAdapter(allList[3], listView.getContext());
+				listView.setAdapter(newsAdapter);
+				url = AppContent.url.newsUrl[3];
+				System.out.println("BUTTON4");
+			}
+		});
+		button5.setOnClickListener(new Button.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				NewsAdapter newsAdapter = new NewsAdapter(allList[4], listView.getContext());
+				listView.setAdapter(newsAdapter);
+				url = AppContent.url.newsUrl[4];
+				System.out.println("BUTTON5");
+			}
+		});
 		
 
-
+		Intent updateIntent = new Intent();
+		updateIntent.setClass(this, readNewsService.class);
+		this.startService(updateIntent);
+		
+		receiver = new newsReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(AppContent.myAction.updateNewsAction);
+		this.registerReceiver(receiver, filter);
+		
+		listView = (ListView)findViewById(R.id.itemList);
+		
+		listView.setOnItemClickListener(this);
+		
+		dialog = new ProgressDialog(this);
+		
 	}
 	
 	@Override
@@ -106,54 +179,110 @@ public class mainActivity extends TabActivity{
 			// port do nothing is ok  
 		}  
 	}
-
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		this.unregisterReceiver(receiver);
+		super.onDestroy();
+	}
 	
-	/*  
-	*@return boolean return true if the application can access the internet  
-	*/
-
-//	@Override
-//	public boolean onKeyDown(int kCode, KeyEvent event) {
-//		// TODO Auto-generated method stub
-//		TabHost tabHost = this.getTabHost();
-//		
-//		if (kCode == KeyEvent.KEYCODE_DPAD_LEFT)
-//		{
-//			int a = tabHost.getCurrentTab();
-//			System.out.println("left Before + " + a);
-//			if (a == 0)
-//			{
-//				a = AppContent.url.newsUrl.length - 1;
-//			}
-//			else 
-//			{
-//				a--;
-//			}
-//			System.out.println("left After + " + a);
-//
-//			tabHost.setCurrentTab(a);
-//		}
-//		else if(kCode == KeyEvent.KEYCODE_DPAD_RIGHT)
-//		{
-//				int a = tabHost.getCurrentTab();
-//				System.out.println("right Before + " + a);
-//				if (a == AppContent.url.newsUrl.length - 1)
-//				{
-//					a = 0;
-//				}
-//				else 
-//				{
-//					++ a;
-//					
-//				}
-//				System.out.println("right After + " + a);
-//
-//				tabHost.setCurrentTab(a);
-//		}
-//		
-//		return false;
-//		//return super.onKeyDown(kCode, event);
-//	}
-
-
+	class newsReceiver extends BroadcastReceiver{
+		
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String trans = intent.getStringExtra("status");
+			System.out.println("OnReceive news Receiver " + trans);
+			
+			for (int i = 0; i < AppContent.url.newsUrl.length; ++ i)
+			{
+				if (AppContent.url.newsUrl[i].equals(trans))
+				{
+					System.out.println("i " + i);
+					asyncTask = new DrawAsyncTask(listView, dialog, itemList, intent, i);
+					asyncTask.execute();
+				}
+			}
+		}
+	}
+	public void onItemClick(AdapterView parent, View v, int postion,
+			long id) {
+		System.out.println("in OnItemClick");
+		
+		Intent intent = new Intent(this, contentActivity.class);
+		Bundle trans = new Bundle();
+		itemList = asyncTask.getItemList();
+		
+		
+		if (itemList.getItem(postion).getTitle() != null)
+		{
+			trans.putString("title", itemList.getItem(postion).getTitle());
+			trans.putString("link", itemList.getItem(postion).getLink());
+			trans.putString("pubDate", itemList.getItem(postion).getPubDate());
+			trans.putString("description", itemList.getItem(postion).getDescription());
+			
+			intent.putExtra("android.intent.extra.INTENT", trans);
+			
+			startActivityForResult(intent,0);
+		}
+	}
+	class DrawAsyncTask extends AsyncTask<Void, Void, Void>{
+		
+		private ListView listView = null; 
+		private String url;
+		private ProgressDialog dialog = null;
+		private RssGroup itemList = null;
+		private Intent intent = null;
+		private int iTemp = 6;
+		
+		public DrawAsyncTask(ListView listView, ProgressDialog dialog, RssGroup itemList, Intent intent, int i){
+			this.listView = listView;
+			this.dialog = dialog;
+			this.itemList = itemList;
+			this.intent = intent;
+			this.iTemp = i;
+		}
+		@Override
+		protected Void doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			itemList =  (RssGroup) intent.getSerializableExtra("itemList");
+			System.out.println("iTemp " + iTemp);
+			allList[iTemp] = itemList;
+			return null;
+		}
+		
+		@Override
+		protected void onCancelled() {
+			// TODO Auto-generated method stub
+			super.onCancelled();
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			// TODO Auto-generated method stub
+			if (iTemp == 0)
+			{
+				NewsAdapter newsAdapter = new NewsAdapter(allList[0], listView.getContext());
+				listView.setAdapter(newsAdapter);
+			}
+			dialog.hide();
+			
+		}
+		
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			dialog.show();
+		}
+		
+		@Override
+		protected void onProgressUpdate(Void... values) {
+			// TODO Auto-generated method stub
+			super.onProgressUpdate(values);
+		}
+		public RssGroup getItemList() {
+			return itemList;
+		}
+		
+		
+	}
+	
 }

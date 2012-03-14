@@ -14,30 +14,36 @@
     android:gravity="center"
     android:layout_marginLeft="20px"
     >
-    <ImageButton android:id="@+id/store_imagebtn_1" 
+    <Button android:id="@+id/button1" 
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
 		>
-	</ImageButton>
-	<ImageButton android:id="@+id/store_imagebtn_2" 
+	</Button>
+	<Button android:id="@+id/button2" 
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
 		android:layout_marginTop="15px">
-		</ImageButton>
-		<ImageButton android:id="@+id/store_imagebtn_3" 
+		</Button>
+	<Button android:id="@+id/button3" 
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
 		android:layout_marginTop="15px">
-		</ImageButton>
-		<ImageButton android:id="@+id/store_imagebtn_4"
+	</Button>
+	<Button android:id="@+id/button4"
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
 		android:layout_marginTop="15px">
-		</ImageButton>
+	</Button>
+	<Button android:id="@+id/button5"
+		android:layout_gravity="center"
+		android:layout_width="190px" 
+		android:layout_height="68px"
+		android:layout_marginTop="15px">
+	</Button>
     </LinearLayout>
     <LinearLayout
     android:orientation="vertical"
@@ -46,7 +52,7 @@
     android:gravity="center"
     >
 	    <ListView
-			android:id="@+id/zzList"
+			android:id="@+id/itemList"
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent"
 		/> 

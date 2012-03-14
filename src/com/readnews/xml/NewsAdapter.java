@@ -77,5 +77,8 @@ public class NewsAdapter extends BaseAdapter{
 		TextView timeTextView;
 		
 	}
+	public void setNewsList(RssGroup newsList) {
+		this.newsList = newsList;
+	}
 
 }
