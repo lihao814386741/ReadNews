@@ -40,24 +40,7 @@ public class contentActivity extends Activity{
        	webView.setHorizontalScrollBarEnabled(false);
        	webView.loadUrl(trans.getString("link"));
        	webView.setWebViewClient(new ReadNewsWebViewClient());
-//       	webView.setWebChromeClient(new WebChromeClient(){
-//
-//			@Override
-//			public void onProgressChanged(WebView view, int newProgress) {
-//				// TODO Auto-generated method stub
-//				contentActivity.this.setProgress(newProgress * 100);
-////				if (newProgress == 20)
-////				{
-////					dialog.hide();
-////				}
-////				
-//				
-//			}
-//       		
-//       		
-//       	});
-//       	
-       	
+
        	
        	
        	
@@ -73,8 +56,6 @@ public class contentActivity extends Activity{
 
 			return true;
 		}
-
-	
 	}
 	
 	@Override

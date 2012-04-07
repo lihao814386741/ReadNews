@@ -450,28 +450,29 @@ public final class R {
     }
     public static final class drawable {
         public static final int appwidget=0x7f020000;
-        public static final int background=0x7f020001;
-        public static final int bgapps=0x7f020002;
-        public static final int button=0x7f020003;
-        public static final int ic_launcher=0x7f020004;
-        public static final int item=0x7f020005;
-        public static final int listbackground=0x7f020006;
-        public static final int loading=0x7f020007;
-        public static final int news=0x7f020008;
-        public static final int store0031=0x7f020009;
+        public static final int appwidget_press=0x7f020001;
+        public static final int background=0x7f020002;
+        public static final int bgapps=0x7f020003;
+        public static final int button=0x7f020004;
+        public static final int button_style=0x7f020005;
+        public static final int ic_launcher=0x7f020006;
+        public static final int item=0x7f020007;
+        public static final int listbackground=0x7f020008;
+        public static final int loading=0x7f020009;
+        public static final int news=0x7f02000a;
+        public static final int store0031=0x7f02000b;
     }
     public static final class id {
-        public static final int appImageButton=0x7f080001;
-        public static final int appTextView=0x7f080000;
-        public static final int button1=0x7f080005;
-        public static final int button2=0x7f080006;
-        public static final int button3=0x7f080007;
-        public static final int button4=0x7f080008;
-        public static final int button5=0x7f080009;
-        public static final int itemList=0x7f08000a;
-        public static final int newsWebView=0x7f080002;
-        public static final int timeTextView=0x7f080004;
-        public static final int titleTextView=0x7f080003;
+        public static final int appButton=0x7f080000;
+        public static final int button1=0x7f080004;
+        public static final int button2=0x7f080005;
+        public static final int button3=0x7f080006;
+        public static final int button4=0x7f080007;
+        public static final int button5=0x7f080008;
+        public static final int itemList=0x7f080009;
+        public static final int newsWebView=0x7f080001;
+        public static final int timeTextView=0x7f080003;
+        public static final int titleTextView=0x7f080002;
     }
     public static final class layout {
         public static final int appwidget=0x7f030000;

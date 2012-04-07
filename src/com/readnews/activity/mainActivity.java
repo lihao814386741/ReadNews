@@ -70,101 +70,113 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		this.setContentView(R.layout.main);
 		
 		//this.requestWindowFeature(Window.FEATURE_PROGRESS);
-		
-		
-		
-		allList = new RssGroup[8];
-//		
-		Toast toast = Toast.makeText(this,
-				"正在载入程序...", Toast.LENGTH_LONG);
-		toast.setGravity(Gravity.CENTER, 0, 0);
-		toast.show();
-		
 		button1 = (Button)findViewById(R.id.button1);
 		button2 = (Button)findViewById(R.id.button2);
 		button3 = (Button)findViewById(R.id.button3);
 		button4 = (Button)findViewById(R.id.button4);
 		button5 = (Button)findViewById(R.id.button5);
-		
+			
+			
 		button1.setText("国内新闻");
 		button2.setText("国际新闻");
 		button3.setText("娱乐新闻");
 		button4.setText("体育新闻");
 		button5.setText("科技新闻");
-		
-		
-		url = AppContent.url.newsUrl[0];
-		button1.setOnClickListener(new Button.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				url = AppContent.url.newsUrl[0];
-				System.out.println("BUTTON1");
-				NewsAdapter newsAdapter = new NewsAdapter(allList[0], listView.getContext());
-				listView.setAdapter(newsAdapter);
-			}
-		});
-		button2.setOnClickListener(new Button.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				url = AppContent.url.newsUrl[1];
-				NewsAdapter newsAdapter = new NewsAdapter(allList[1], listView.getContext());
-				listView.setAdapter(newsAdapter);
-				System.out.println("BUTTON2");
-			}
-		});
-		button3.setOnClickListener(new Button.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				NewsAdapter newsAdapter = new NewsAdapter(allList[2], listView.getContext());
-				listView.setAdapter(newsAdapter);
-				url = AppContent.url.newsUrl[2];
-				System.out.println("BUTTON3");
-			}
-		});
-		button4.setOnClickListener(new Button.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				NewsAdapter newsAdapter = new NewsAdapter(allList[3], listView.getContext());
-				listView.setAdapter(newsAdapter);
-				url = AppContent.url.newsUrl[3];
-				System.out.println("BUTTON4");
-			}
-		});
-		button5.setOnClickListener(new Button.OnClickListener()
-		{
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				NewsAdapter newsAdapter = new NewsAdapter(allList[4], listView.getContext());
-				listView.setAdapter(newsAdapter);
-				url = AppContent.url.newsUrl[4];
-				System.out.println("BUTTON5");
-			}
-		});
-		
 
-		Intent updateIntent = new Intent();
-		updateIntent.setClass(this, readNewsService.class);
-		this.startService(updateIntent);
-		
+		allList = new RssGroup[8];
+		url = AppContent.url.newsUrl[0];
 		receiver = new newsReceiver();
+		listView = (ListView)findViewById(R.id.itemList);
+		dialog = new ProgressDialog(this);
+		
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(AppContent.myAction.updateNewsAction);
 		this.registerReceiver(receiver, filter);
+		if (!this.isNetworkAvailable())
+		{
+			Toast toast = Toast.makeText(this,
+				"无法链接网络...", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+			
+		}
 		
-		listView = (ListView)findViewById(R.id.itemList);
+		else
+		{
+			
+//			
+			Toast toast = Toast.makeText(this,
+					"正在载入程序...", Toast.LENGTH_LONG);
+			toast.setGravity(Gravity.CENTER, 0, 0);
+			toast.show();
+	
+			
+			button1.setOnClickListener(new Button.OnClickListener()
+			{
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					url = AppContent.url.newsUrl[0];
+					System.out.println("BUTTON1");
+					NewsAdapter newsAdapter = new NewsAdapter(allList[0], listView.getContext());
+					listView.setAdapter(newsAdapter);
+				}
+			});
+			button2.setOnClickListener(new Button.OnClickListener()
+			{
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					url = AppContent.url.newsUrl[1];
+					NewsAdapter newsAdapter = new NewsAdapter(allList[1], listView.getContext());
+					listView.setAdapter(newsAdapter);
+					System.out.println("BUTTON2");
+				}
+			});
+			button3.setOnClickListener(new Button.OnClickListener()
+			{
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					NewsAdapter newsAdapter = new NewsAdapter(allList[2], listView.getContext());
+					listView.setAdapter(newsAdapter);
+					url = AppContent.url.newsUrl[2];
+					System.out.println("BUTTON3");
+				}
+			});
+			button4.setOnClickListener(new Button.OnClickListener()
+			{
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					NewsAdapter newsAdapter = new NewsAdapter(allList[3], listView.getContext());
+					listView.setAdapter(newsAdapter);
+					url = AppContent.url.newsUrl[3];
+					System.out.println("BUTTON4");
+				}
+			});
+			button5.setOnClickListener(new Button.OnClickListener()
+			{
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					NewsAdapter newsAdapter = new NewsAdapter(allList[4], listView.getContext());
+					listView.setAdapter(newsAdapter);
+					url = AppContent.url.newsUrl[4];
+					System.out.println("BUTTON5");
+				}
+			});
+			
+			
+			Intent updateIntent = new Intent();
+			updateIntent.setClass(this, readNewsService.class);
+			this.startService(updateIntent);
+			
 		
-		listView.setOnItemClickListener(this);
-		
-		dialog = new ProgressDialog(this);
+			
+			listView.setOnItemClickListener(this);
+			
+		}
 		
 	}
 	
@@ -181,7 +193,9 @@ public class mainActivity extends Activity implements OnItemClickListener{
 	}
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
+		this.finish();
 		this.unregisterReceiver(receiver);
+		
 		super.onDestroy();
 	}
 	
@@ -284,5 +298,23 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		
 		
 	}
-	
+
+	public boolean isNetworkAvailable() {
+		Context context = getApplicationContext();
+		ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity == null) {
+			//boitealerte(this.getString(R.string.alert),"getSystemService rend null");
+		} else {
+			NetworkInfo[] info = connectivity.getAllNetworkInfo();
+			if (info != null) {
+				for (int i = 0; i < info.length; i++) {
+					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 }

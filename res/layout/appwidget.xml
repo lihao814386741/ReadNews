@@ -3,26 +3,21 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/appwidget"
     >
+e
 
-    <TextView
-        android:id="@+id/appTextView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/maroon"
-        android:textSize="7pt"
-        android:padding="4dip"
-        android:layout_gravity="center"
-        />
-    <ImageButton
-        android:id="@+id/appImageButton"
+    <Button
+        android:id="@+id/appButton"
         android:clickable="true"
         android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:background="#00000000"
-		android:src="@drawable/news"
-		android:layout_gravity="center"
+		android:background="@drawable/button_style"
 		android:layout_marginBottom="2dip"
+		android:layout_marginLeft="10dip"
+		android:layout_marginRight="10dip"
+		android:gravity ="center_vertical|left"
+		android:paddingLeft="34dip"
+		android:paddingRight="30dip"
+		android:textStyle="bold"
         />
 </LinearLayout>

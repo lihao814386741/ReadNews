@@ -23,7 +23,7 @@ public class appWidgetProvider extends AppWidgetProvider{
 								  "正在从服务器获取新闻..."};
 	private String updateButtonAction = "com.read.news.action.update.news";
 	private RemoteViews remoteViews = null;
-	private String textShow = "点击按钮获取新闻...";
+	private String textShow = "点击此处获取新闻...";
 
 	@Override
 	public void onDeleted(Context context, int[] appWidgetIds) {
@@ -60,14 +60,16 @@ public class appWidgetProvider extends AppWidgetProvider{
 			int i;
 			for ( i = 0; i < showWord.length - 1; ++ i)
 			{
-				textShow += showWord[i];
+				textShow += "-";
+					textShow += showWord[i];
 				textShow += "\n\n";
 			}
+			textShow += "-";
 			textShow += showWord[i];
 			System.out.println("textShow " + textShow);
 			RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-			remoteViews.setTextViewText(R.id.appTextView, textShow);
-		
+			
+				remoteViews.setTextViewText(R.id.appButton, textShow);
 			AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
 		
 			ComponentName componentName = new ComponentName(context, appWidgetProvider.class);
@@ -92,8 +94,9 @@ public class appWidgetProvider extends AppWidgetProvider{
 
 				PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 				remoteViews = new RemoteViews(context.getPackageName(), R.layout.appwidget);
-				remoteViews.setOnClickPendingIntent(R.id.appImageButton, pendingIntent);
-				remoteViews.setTextViewText(R.id.appTextView, textShow);
+				remoteViews.setOnClickPendingIntent(R.id.appButton, pendingIntent);
+				remoteViews.setTextViewText(R.id.appButton, textShow);
+
 				
 				appWidgetManager.updateAppWidget(appWidgetIds[i], remoteViews);
 		}
