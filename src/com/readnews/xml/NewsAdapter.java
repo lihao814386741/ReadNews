@@ -57,6 +57,7 @@ public class NewsAdapter extends BaseAdapter{
 			holder = new ViewHolder();
 			holder.titleTextView = (TextView)convertView.findViewById(R.id.titleTextView);
 			holder.timeTextView = (TextView)convertView.findViewById(R.id.timeTextView);	
+			holder.desTextView = (TextView)convertView.findViewById(R.id.desTextView);
 			convertView.setTag(holder);
 			
 		}
@@ -68,6 +69,7 @@ public class NewsAdapter extends BaseAdapter{
 		RssItem rssItem = (RssItem)this.getItem(position);
 		holder.titleTextView.setText(rssItem.getTitle());
 		holder.timeTextView.setText(rssItem.getPubDate());
+		holder.desTextView.setText(rssItem.getDescription());
 
 		
 		return convertView;
@@ -75,6 +77,7 @@ public class NewsAdapter extends BaseAdapter{
 	static class ViewHolder{
 		TextView titleTextView;
 		TextView timeTextView;
+		TextView desTextView;
 		
 	}
 	public void setNewsList(RssGroup newsList) {

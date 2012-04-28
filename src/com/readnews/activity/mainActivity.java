@@ -36,8 +36,10 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.TabHost.TabSpec;
 
 public class mainActivity extends Activity implements OnItemClickListener{
@@ -61,6 +63,7 @@ public class mainActivity extends Activity implements OnItemClickListener{
 	private Button button4 = null;
 	private Button button5 = null;
 	private RssGroup[] allList = null;
+	private TextView itemNum = null;
 	
 	
 	@Override
@@ -75,6 +78,7 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		button3 = (Button)findViewById(R.id.button3);
 		button4 = (Button)findViewById(R.id.button4);
 		button5 = (Button)findViewById(R.id.button5);
+		itemNum = (TextView)this.findViewById(R.id.itemnum);
 			
 			
 		button1.setText("国内新闻");
@@ -87,6 +91,10 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		url = AppContent.url.newsUrl[0];
 		receiver = new newsReceiver();
 		listView = (ListView)findViewById(R.id.itemList);
+		listView.setBackgroundResource(R.drawable.beijing);
+		listView.setPadding(25, 35, 25, 40);
+		
+		
 		dialog = new ProgressDialog(this);
 		
 		IntentFilter filter = new IntentFilter();
@@ -109,7 +117,26 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					"正在载入程序...", Toast.LENGTH_LONG);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
-	
+			
+			listView.setOnItemSelectedListener(new OnItemSelectedListener(){
+
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View arg1,
+						int arg2, long arg3) {
+					System.out.println("the id is :" + arg2 + "and total id is " + listView.getCount());
+					
+					itemNum.setText(++arg2 + "/" + listView.getCount());
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				
+			});
+			
 			
 			button1.setOnClickListener(new Button.OnClickListener()
 			{
@@ -120,6 +147,7 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					System.out.println("BUTTON1");
 					NewsAdapter newsAdapter = new NewsAdapter(allList[0], listView.getContext());
 					listView.setAdapter(newsAdapter);
+					listView.setCacheColorHint(0);
 				}
 			});
 			button2.setOnClickListener(new Button.OnClickListener()
@@ -130,6 +158,8 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					url = AppContent.url.newsUrl[1];
 					NewsAdapter newsAdapter = new NewsAdapter(allList[1], listView.getContext());
 					listView.setAdapter(newsAdapter);
+					listView.setCacheColorHint(0);
+
 					System.out.println("BUTTON2");
 				}
 			});
@@ -140,6 +170,8 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					// TODO Auto-generated method stub
 					NewsAdapter newsAdapter = new NewsAdapter(allList[2], listView.getContext());
 					listView.setAdapter(newsAdapter);
+					listView.setCacheColorHint(0);
+
 					url = AppContent.url.newsUrl[2];
 					System.out.println("BUTTON3");
 				}
@@ -151,6 +183,8 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					// TODO Auto-generated method stub
 					NewsAdapter newsAdapter = new NewsAdapter(allList[3], listView.getContext());
 					listView.setAdapter(newsAdapter);
+					listView.setCacheColorHint(0);
+
 					url = AppContent.url.newsUrl[3];
 					System.out.println("BUTTON4");
 				}
@@ -162,6 +196,8 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					// TODO Auto-generated method stub
 					NewsAdapter newsAdapter = new NewsAdapter(allList[4], listView.getContext());
 					listView.setAdapter(newsAdapter);
+					listView.setCacheColorHint(0);
+
 					url = AppContent.url.newsUrl[4];
 					System.out.println("BUTTON5");
 				}

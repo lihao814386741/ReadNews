@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -21,7 +22,7 @@ import android.widget.Toast;
 public class contentActivity extends Activity{
 
 	private ProgressDialog dialog = null;
-	
+	private WebView webView = null;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.content);
@@ -35,12 +36,12 @@ public class contentActivity extends Activity{
 		toast.setGravity(Gravity.CENTER, 0, 0);
 		toast.show();
        	
-       	WebView webView = (WebView)findViewById(R.id.newsWebView);
+       	webView = (WebView)findViewById(R.id.newsWebView);
        	webView.getSettings().setJavaScriptEnabled(true);
        	webView.setHorizontalScrollBarEnabled(false);
        	webView.loadUrl(trans.getString("link"));
        	webView.setWebViewClient(new ReadNewsWebViewClient());
-
+       	webView.setFocusable(false);
        	
        	
        	
@@ -67,6 +68,23 @@ public class contentActivity extends Activity{
 		} else if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {  
 			// port do nothing is ok  
 		}  
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN)
+		{
+			System.out.println("press Down");
+			webView.pageDown(false);
+			
+		}
+		else if (keyCode == KeyEvent.KEYCODE_DPAD_UP)
+		{
+			webView.pageUp(false);
+			
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 	
 

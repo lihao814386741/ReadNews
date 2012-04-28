@@ -44,6 +44,14 @@
 		android:layout_height="68px"
 		android:layout_marginTop="15px">
 	</Button>
+    <TextView
+        android:id="@+id/itemnum"
+		android:textColor="@color/white"
+		android:layout_width="190px" 
+		android:layout_height="68px"
+
+        />
+
     </LinearLayout>
     <LinearLayout
     android:orientation="vertical"
