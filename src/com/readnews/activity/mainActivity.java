@@ -33,6 +33,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TabHost;
@@ -64,13 +65,23 @@ public class mainActivity extends Activity implements OnItemClickListener{
 	private Button button5 = null;
 	private RssGroup[] allList = null;
 	private TextView itemNum = null;
+	private LinearLayout mainLinearLayout = null;
 	
+	public static void launch(Context c)
+	{
+		Intent intent = new Intent(c, mainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		c.startActivity(intent);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.main);
+		mainLinearLayout = (LinearLayout)this.findViewById(R.id.mainLinearLayout);
+	//	mainActivity.this.setTheme(R.style.mytheme);
+
 		
 		//this.requestWindowFeature(Window.FEATURE_PROGRESS);
 		button1 = (Button)findViewById(R.id.button1);
@@ -80,12 +91,12 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		button5 = (Button)findViewById(R.id.button5);
 		itemNum = (TextView)this.findViewById(R.id.itemnum);
 			
-			
-		button1.setText("国内新闻");
-		button2.setText("国际新闻");
-		button3.setText("娱乐新闻");
-		button4.setText("体育新闻");
-		button5.setText("科技新闻");
+//			
+//		button1.setText("国内新闻");
+//		button2.setText("国际新闻");
+//		button3.setText("娱乐新闻");
+//		button4.setText("体育新闻");
+//		button5.setText("科技新闻");
 
 		allList = new RssGroup[8];
 		url = AppContent.url.newsUrl[0];
@@ -146,8 +157,9 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					url = AppContent.url.newsUrl[0];
 					System.out.println("BUTTON1");
 					NewsAdapter newsAdapter = new NewsAdapter(allList[0], listView.getContext());
-					listView.setAdapter(newsAdapter);
 					listView.setCacheColorHint(0);
+
+					listView.setAdapter(newsAdapter);
 				}
 			});
 			button2.setOnClickListener(new Button.OnClickListener()
@@ -157,8 +169,9 @@ public class mainActivity extends Activity implements OnItemClickListener{
 					// TODO Auto-generated method stub
 					url = AppContent.url.newsUrl[1];
 					NewsAdapter newsAdapter = new NewsAdapter(allList[1], listView.getContext());
-					listView.setAdapter(newsAdapter);
 					listView.setCacheColorHint(0);
+
+					listView.setAdapter(newsAdapter);
 
 					System.out.println("BUTTON2");
 				}
@@ -169,8 +182,9 @@ public class mainActivity extends Activity implements OnItemClickListener{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					NewsAdapter newsAdapter = new NewsAdapter(allList[2], listView.getContext());
-					listView.setAdapter(newsAdapter);
 					listView.setCacheColorHint(0);
+
+					listView.setAdapter(newsAdapter);
 
 					url = AppContent.url.newsUrl[2];
 					System.out.println("BUTTON3");
@@ -182,8 +196,9 @@ public class mainActivity extends Activity implements OnItemClickListener{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					NewsAdapter newsAdapter = new NewsAdapter(allList[3], listView.getContext());
-					listView.setAdapter(newsAdapter);
 					listView.setCacheColorHint(0);
+
+					listView.setAdapter(newsAdapter);
 
 					url = AppContent.url.newsUrl[3];
 					System.out.println("BUTTON4");
@@ -195,8 +210,9 @@ public class mainActivity extends Activity implements OnItemClickListener{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					NewsAdapter newsAdapter = new NewsAdapter(allList[4], listView.getContext());
-					listView.setAdapter(newsAdapter);
 					listView.setCacheColorHint(0);
+
+					listView.setAdapter(newsAdapter);
 
 					url = AppContent.url.newsUrl[4];
 					System.out.println("BUTTON5");
@@ -315,6 +331,7 @@ public class mainActivity extends Activity implements OnItemClickListener{
 			}
 			dialog.hide();
 			
+			
 		}
 		
 		@Override
@@ -352,5 +369,7 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		}
 		return false;
 	}
+
+
 
 }

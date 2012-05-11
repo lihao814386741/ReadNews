@@ -44,13 +44,14 @@
             android:configChanges="keyboardHidden|orientation"
              >
         </activity>
-d
+
 		<activity
             android:label="@string/app_name"
             android:name=".activity.mainActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:theme="@style/mytheme">         
-			<intent-filter >
+            android:theme="@drawable/bg"
+            >         
+            			<intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

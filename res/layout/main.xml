@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/mainLinearLayout"
     android:orientation="horizontal"
     android:layout_width="800px"
     android:layout_height="480px"
-    android:background="@drawable/bgapps"
+    android:background="#7391ffff"
     android:gravity="center"
     >
     <LinearLayout
-    android:orientation="vertical"
+xmlns:android="http://schemas.android.com/apk/res/android"   
+
+	 android:orientation="vertical"
     android:layout_width="200px"
     android:layout_height="fill_parent"
     android:gravity="center"
@@ -18,31 +21,42 @@
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
+		android:background="@drawable/button_jiaodian"
+		
 		>
 	</Button>
 	<Button android:id="@+id/button2" 
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
-		android:layout_marginTop="15px">
+		android:layout_marginTop="15px"
+		android:background="@drawable/button_guoji"
+		
+		>
 		</Button>
 	<Button android:id="@+id/button3" 
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
-		android:layout_marginTop="15px">
+		android:layout_marginTop="15px"
+		android:background="@drawable/button_yule"
+		>
 	</Button>
 	<Button android:id="@+id/button4"
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
-		android:layout_marginTop="15px">
+		android:layout_marginTop="15px"
+		android:background="@drawable/button_tiyu"
+		>
 	</Button>
 	<Button android:id="@+id/button5"
 		android:layout_gravity="center"
 		android:layout_width="190px" 
 		android:layout_height="68px"
-		android:layout_marginTop="15px">
+		android:layout_marginTop="15px"
+		android:background="@drawable/button_keji"
+		>
 	</Button>
     <TextView
         android:id="@+id/itemnum"
