@@ -91,12 +91,7 @@ public class mainActivity extends Activity implements OnItemClickListener{
 		button5 = (Button)findViewById(R.id.button5);
 		itemNum = (TextView)this.findViewById(R.id.itemnum);
 			
-//			
-//		button1.setText("国内新闻");
-//		button2.setText("国际新闻");
-//		button3.setText("娱乐新闻");
-//		button4.setText("体育新闻");
-//		button5.setText("科技新闻");
+
 
 		allList = new RssGroup[8];
 		url = AppContent.url.newsUrl[0];

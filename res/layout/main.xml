@@ -5,7 +5,7 @@
     android:orientation="horizontal"
     android:layout_width="800px"
     android:layout_height="480px"
-    android:background="#7391ffff"
+    android:background="#7391ff"
     android:gravity="center"
     >
     <LinearLayout
